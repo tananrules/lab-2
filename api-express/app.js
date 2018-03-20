@@ -1,14 +1,32 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+//Cors for cross origin requests
+const cors = require('cors');
 
-var app = express();
+//Passport
+const passport = require('passport');
+
+//Mongoose
+const mongoose = require('mongoose');
+
+const app = express();
+
+// Set native promises as mongoose promise
+mongoose.Promise = global.Promise;
+// MongoDB Connection
+mongoose.connect('mongodb://localhost:27017/lab2', (error) => {
+  if (error) {
+    console.error('Please make sure Mongodb is installed and running!');
+    throw error;
+  } else {
+  	console.log('Mongo is up and running!');
+  }
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,12 +40,28 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Using CORS
+app.use(cors());
+
+//Initialize Passport
+app.use(passport.initialize());
+
+//Routes
+const index = require('./routes/index');
+const users = require('./routes/users');
+const auth = require('./routes/auth')(passport);
+
+//Using Routes
 app.use('/', index);
-app.use('/users', users);
+// app.use('/users', users);
+app.use('/api/auth', auth);
+
+const user = require('./models/user');
+require('./config/passport.js')(passport, user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
