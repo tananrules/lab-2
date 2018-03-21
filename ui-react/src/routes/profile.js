@@ -7,6 +7,7 @@ import Header from '../components/Header';
 const mapStateToProps = (state) => {
   return {
     currentUser: state.loginReducer.currentUser,
+    isAuthenticated: state.loginReducer.isAuthenticated,
   };
 }
 
@@ -23,7 +24,13 @@ class Profile extends Component {
 
 
   render() {
-    let { currentUser } = this.props;
+    let { currentUser, isAuthenticated } = this.props;
+
+    if(isAuthenticated === false) {
+      return (
+        <Redirect to='/login' />
+      )
+    }
 
     return (
       <div className="culmn">

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { signup } from '../actions/login'
 
 const mapDispatchToProps = dispatch => {
@@ -40,10 +40,6 @@ class Signup extends Component {
 
   render() {
     let {first_name, last_name, email, password} = this.state;
-
-    let marginTop = {
-      marginTop: '20px'
-    }
 
     let colorgraph = {
       height: '5px',

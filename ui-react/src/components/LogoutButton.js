@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { logout } from '../actions/login';
@@ -18,22 +17,12 @@ const mapDispatchToProps = dispatch => {
 }
 
 class LogoutButton extends Component {
-  // componentWillMount() {
-  //   this.props.logout();
-  // }
 
   logout() {
-    debugger
     this.props.logout();
   }
 
-  render() {
-    if(this.props.isAuthenticated === false) {
-      return (
-        <Redirect to='/login' />
-      )
-    }    
-
+  render() {  
     return (
       <button className="btn btn-danger" onClick={this.logout.bind(this)}>Log out</button>
     );

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-// import { logout } from '../actions/login';
 
 import LogoutButton from './LogoutButton';
 
@@ -11,17 +10,7 @@ const mapStateToProps = (state) => {
   };
 }
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     logout: () => dispatch(logout())
-//   };
-// }
-
 class Header extends Component {
-
-  // logout() {
-  //   this.props.logout();
-  // }
 
   render() {
     const { isAuthenticated } = this.props;

@@ -50,7 +50,7 @@ export function login(credentials) {
 export function signup(userData) {
 	return function(dispatch) {
 		axios.post('http://localhost:8080/api/auth/sign-up', userData).then((response) => {
-			if(response.status == 200) {
+			if(response.status === 200) {
 				dispatch(currentUser(response.data));
 			} else {
 
@@ -62,7 +62,7 @@ export function signup(userData) {
 export function logout() {
 	return function(dispatch) {
 		dispatch(isAuthenticated(false));
-		dispatch(currentUser({}));
+		dispatch(currentUser(null));
 		localStorage.clear();
 	}
 }

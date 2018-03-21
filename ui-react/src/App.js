@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
-import logo from './logo.svg';
 import './App.css';
 import { Route, Redirect } from 'react-router-dom';
 
