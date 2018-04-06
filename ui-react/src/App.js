@@ -8,6 +8,9 @@ import { Route, Redirect } from 'react-router-dom';
 import Profile from './routes/profile';
 import Login from './components/login';
 import Signup from './components/signup';
+
+
+import WelcomePage from './routes/WelcomePage';
 // import PostProject from './app/routes/Freelancer/post-project';
 // import Dashboard from './app/routes/Freelancer/Dashboard';
 // import SingleJob from './app/routes/Freelancer/SingleJob';
@@ -41,6 +44,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="app">
+        <Route exact path="/" component={WelcomePage} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <AuthenticatedRoute exact path="/profile" component={Profile}/>

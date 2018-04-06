@@ -31,7 +31,7 @@ export function login(credentials) {
 
 				localStorage.setItem('token', token);
 				localStorage.setItem('user', JSON.stringify(user));
-				debugger
+
 				dispatch(isAuthenticated(true));
 				dispatch(currentUser(user));
 
