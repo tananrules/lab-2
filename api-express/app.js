@@ -14,6 +14,9 @@ const passport = require('passport');
 //Mongoose
 const mongoose = require('mongoose');
 
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+
 const app = express();
 
 // Set native promises as mongoose promise
@@ -27,6 +30,13 @@ mongoose.connect('mongodb://localhost:27017/lab2', (error) => {
   	console.log('Mongo is up and running!');
   }
 });
+
+// mongoose.connect(connectionOptions);
+app.use(session({
+  secret: 'tarunarorareactexpress',
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -47,13 +57,11 @@ app.use(cors());
 app.use(passport.initialize());
 
 //Routes
-const index = require('./routes/index');
-const users = require('./routes/users');
 const auth = require('./routes/auth')(passport);
+const jobs = require('./routes/jobs');
 
 //Using Routes
-app.use('/', index);
-// app.use('/users', users);
+app.use('/api/jobs', jobs);
 app.use('/api/auth', auth);
 
 const user = require('./models/user');

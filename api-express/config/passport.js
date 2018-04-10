@@ -30,7 +30,6 @@ module.exports = function(passport, User) {
       User.findOne({
         email: email
       }).then(function(user) {
-        debugger
         if (!user) {
           return done({
             error: 'Email does not exist'
