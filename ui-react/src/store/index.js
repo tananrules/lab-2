@@ -7,6 +7,10 @@ const user = localStorage.getItem('user') || null;
 const isAuthenticated = (localStorage.getItem('token') && localStorage.getItem('user')) ? true : false;
 
 const defaultState = {
+	defaultReducer: {
+		displaySnackbar: false,
+		snackbarMessage: "Default Message",
+	},
 	loginReducer: {
 		isAuthenticated: isAuthenticated,
 		currentUser: JSON.parse(user),

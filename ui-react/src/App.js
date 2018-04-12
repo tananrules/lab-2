@@ -1,19 +1,36 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Redirect } from 'react-router-dom';
+import { connect } from "react-redux";
+
+//Material UI
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Snackbar from 'material-ui/Snackbar';
 
 //Components
-// import Calculator from './app/routes/Calculator/Calculator';
-// import from './app/routes/Freelancer/Freelancer';
 import Profile from './routes/profile';
 import Login from './components/login';
 import Signup from './components/signup';
 
-
+// Routes
 import WelcomePage from './routes/WelcomePage';
-// import PostProject from './app/routes/Freelancer/post-project';
-// import Dashboard from './app/routes/Freelancer/Dashboard';
-// import SingleJob from './app/routes/Freelancer/SingleJob';
+import PostProject from './routes/post-project';
+import Feed from './routes/feed';
+
+import { hideSnackbar } from './actions/jobs';
+
+const mapStateToProps = (state) => {
+  return {
+    displaySnackbar: state.defaultReducer.displaySnackbar,
+    snackbarMessage: state.defaultReducer.snackbarMessage
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    hideSnackbar: (boolean) => dispatch(hideSnackbar(boolean))
+  };
+}
 
 const checkIfAuthenticated = () => {
   const token = localStorage.getItem('token');
@@ -40,15 +57,35 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-export default class App extends Component {
+class App extends Component {
+  debugger
+  handleRequestClose = () => {
+    this.props.hideSnackbar(false);
+  };
+
   render() {
+    let { displaySnackbar, snackbarMessage } = this.props;
+
     return (
-      <div className="app">
-        <Route exact path="/" component={WelcomePage} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <AuthenticatedRoute exact path="/profile" component={Profile}/>
-      </div>
+      <MuiThemeProvider>
+        <div className="app">
+          <Route exact path="/" component={WelcomePage} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+          <AuthenticatedRoute exact path="/profile" component={Profile} />
+          <AuthenticatedRoute exact path="/post-project" component={PostProject} />
+          <AuthenticatedRoute exact path="/feed" component={Feed} />
+
+          <Snackbar
+            open={displaySnackbar}
+            message={snackbarMessage}
+            autoHideDuration={4000}
+            onRequestClose={this.handleRequestClose}
+          />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
