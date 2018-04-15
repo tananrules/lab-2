@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from "react-router-dom";
 
 import Header from '../components/Header';
 
-export default class Feed extends Component {
+export default class SingleJob extends Component {
 
   constructor() {
     super();
     this.state = {
-      jobs: []
+      singleJob: []
     }
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8080/api/jobs').then((response) => {
+    const { match } = this.props
+    axios.get(`http://localhost:8080/api/jobs/${match.params.id}`).then((response) => {
       this.setState({
-        jobs: response.data
-      })
-    })
+        singleJob: response.data
+      });
+    });
   }
 
 	render() {
@@ -33,7 +33,7 @@ export default class Feed extends Component {
       backgroundImage: 'linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4)'
     }
 
-    let { jobs } = this.state;
+    let { singleJob } = this.state;
 
     return (
       <div className="culmn">
@@ -46,42 +46,46 @@ export default class Feed extends Component {
             <div className="row">
               <div className="col-md-8 col-md-offset-2">
                 <fieldset>
-                  <h2>Job Feed</h2>
+                  <h2>Job Details</h2>
                   <hr style={colorgraph} />
                 </fieldset>
-                <div id="feed">
-                  {jobs.map((job) => {
-                    let url = "/feed/"+job._id;
-                    return (
-                      <div className="panel panel-default">
-                        <div className="panel-heading">
-                          <h4><Link to={url}>{job.title}</Link></h4>
-                        </div>
-                        <div className="panel-body">
-                          {job.description}
-                        </div>
-                        <br/>
-                        <div className="panel-body">
-                          <div className="row">
-                            <div className="col-md-12">
-                              <b>Employer</b>
-                            </div>
-                            <div className="col-md-12">
-                              <b>Budget Range</b> {job.budget} $
-                            </div>
-                            <div className="col-md-12">
-                              <b>No of Bids yet</b> {job.bids.length}
-                            </div>
+                <div id="postlist">
+                  <div className="panel panel-default">
+                    <div className="panel-heading">
+                      <div className="text-center">
+                        <div className="row">
+                          <div className="col-sm-9">
+                            { singleJob && <h3 className="pull-left">{singleJob.title}</h3> }
                           </div>
                         </div>
-                        <div className="panel-footer">
-                          {job.skills.map((skill) => {
-                            return(<span className="label label-default">{skill}</span>)
-                          })}
-                        </div>
                       </div>
-                    )})
-                  }
+                    </div>
+                    { singleJob && <div className="panel-body">
+                      {singleJob.description}
+                    </div> }
+                    { singleJob.skills && <div className="panel-footer">
+                        {singleJob.skills.map((skill) => {
+                          return(<span className="label label-default">{skill}</span>)
+                        })}
+                    </div>}
+                  </div>
+
+                  <div className="panel">
+                    <div className="panel-body">
+                      <form className="form-inline">
+                        <div className="form-group">
+                          <label className="sr-only">Amount (in dollars)</label>
+                          <div className="input-group">
+                            <div className="input-group-addon">$</div>
+                            <input type="text" className="form-control" placeholder="Enter your bid" />
+                          </div>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="submit" className="btn btn-info">Place your Bid</button>
+                      </form>
+
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

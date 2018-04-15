@@ -26,4 +26,10 @@ router.get('/', (req, res) => {
   })
 });
 
+router.get('/:id', (req, res) => {
+  Job.findById(req.params.id, (err, singleJob) => {
+  	res.status(200).json(singleJob);
+  });
+});
+
 module.exports = router;

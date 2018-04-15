@@ -16,6 +16,7 @@ import Signup from './components/signup';
 import WelcomePage from './routes/WelcomePage';
 import PostProject from './routes/post-project';
 import Feed from './routes/feed';
+import SingleJob from './routes/SingleJob';
 
 import { hideSnackbar } from './actions/jobs';
 
@@ -58,7 +59,6 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => (
 );
 
 class App extends Component {
-  debugger
   handleRequestClose = () => {
     this.props.hideSnackbar(false);
   };
@@ -75,6 +75,7 @@ class App extends Component {
           <AuthenticatedRoute exact path="/profile" component={Profile} />
           <AuthenticatedRoute exact path="/post-project" component={PostProject} />
           <AuthenticatedRoute exact path="/feed" component={Feed} />
+          <AuthenticatedRoute exact path="/feed/:id" component={SingleJob} />
 
           <Snackbar
             open={displaySnackbar}
