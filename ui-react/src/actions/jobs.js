@@ -25,19 +25,23 @@ export function snackbarMessage(message) {
 //Post Project
 export function postProject(data) {
 	return function(dispatch) {
-		dispatch(snackbarMessage("Shrusti with mallu"));
-		dispatch(showSnackbar(true));
-		// axios.post('http://localhost:8080/api/auth/jobs', data).then((response) => {
+		// dispatch(snackbarMessage("Shrusti with mallu"));
+		// dispatch(showSnackbar(true));
+		// axios.get('http://localhost:8080/api/jobs', data).then((response) => {
 		// 	debugger
-		// 	if(response.status === 200) {
+		// })
+		debugger
+		axios.post('http://localhost:8080/api/jobs', data).then((response) => {
+			debugger
+			if(response.status === 200) {
 				
 
-		// 	} else {
-		// 		console.log("Unexpected error")
-		// 	}
-		// }).catch((err) => {
-		// 	const {error} = err.response.data;
-		// 	console.error(error);
-		// });
+			} else {
+				console.log("Unexpected error")
+			}
+		}).catch((err) => {
+			const {error} = err.response.data;
+			console.error(error);
+		});
 	}
 } 

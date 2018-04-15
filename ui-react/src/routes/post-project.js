@@ -23,7 +23,7 @@ class PostProject extends Component {
     this.state = {
       title: "",
       description: "",
-      skills: "",
+      skills: [],
       budget: "",
 
     }
@@ -37,6 +37,16 @@ class PostProject extends Component {
   handleChange(event) {
     event.preventDefault();
     this.setState({ [event.target.id]: event.target.value });
+  }
+
+  handleSkills(event) {
+    event.preventDefault();
+    let skills = event.target.value.trim().split(',').map((item) => {
+      return item.toLowerCase();
+    });
+    this.setState({
+      skills: skills
+    })
   }
 
   handleBudget(type, event) {
@@ -91,7 +101,7 @@ class PostProject extends Component {
                   </div>
                   <div className="form-group">
                     <label>Skills Required</label> (Seperate skills using " , ")
-                    <textarea type="text" className="form-control" id="skills" placeholder="Enter skills required for the job" required onChange={this.handleChange.bind(this)} />
+                    <textarea type="text" className="form-control" id="skills" placeholder="Enter skills required for the job" required onChange={this.handleSkills.bind(this)} />
                   </div>
                   <div className="form-group">
                     <label>Budget Range</label>
