@@ -8,13 +8,14 @@ export default class SingleJob extends Component {
   constructor() {
     super();
     this.state = {
-      singleJob: []
+      singleJob: {}
     }
   }
 
   componentDidMount() {
     const { match } = this.props
     axios.get(`http://localhost:8080/api/jobs/${match.params.id}`).then((response) => {
+      debugger
       this.setState({
         singleJob: response.data
       });

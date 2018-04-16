@@ -26,8 +26,7 @@ export function snackbarMessage(message) {
 export function postProject(data) {
 	return function(dispatch) {
 		axios.post('http://localhost:8080/api/jobs', data).then((response) => {
-			debugger
-			if(response.status === 200) {
+			if(response.status === 201) {
 				dispatch(snackbarMessage("Job added successfully!"));
 				dispatch(showSnackbar(true));
 			} else {

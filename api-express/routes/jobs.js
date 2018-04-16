@@ -21,13 +21,17 @@ router.post('/', (req, res) => {
 
 //Get all Jobs
 router.get('/', (req, res) => {
-  Job.find({}, (err, jobs) => {
+  // Job.find({}, (err, jobs) => {
+  // 	res.status(200).json(jobs);
+  // })
+  Job.find({}).populate('owner', '-password').then((jobs) => {
   	res.status(200).json(jobs);
   })
 });
 
 router.get('/:id', (req, res) => {
-  Job.findById(req.params.id, (err, singleJob) => {
+  // let response = "";
+  Job.findById(req.params.id).populate('owner', '-password').then((singleJob) => {
   	res.status(200).json(singleJob);
   });
 });

@@ -25,7 +25,7 @@ class PostProject extends Component {
       description: "",
       skills: [],
       budget: "",
-
+      owner: ""
     }
   }
 
@@ -46,7 +46,12 @@ class PostProject extends Component {
     });
     this.setState({
       skills: skills
-    })
+    });
+
+    let { currentUser } = this.props;
+    this.setState({
+      owner: currentUser.id
+    });
   }
 
   handleBudget(type, event) {
@@ -72,14 +77,13 @@ class PostProject extends Component {
     this.setState({
       title: "",
       description: "",
-      skills: "",
+      skills: [],
       budget: "",
+      owner: ""
     })
   }
 
   render() {
-    let { currentUser } = this.props;
-
     return (
       <div className="culmn">
         <Header></Header>
@@ -115,7 +119,7 @@ class PostProject extends Component {
                     </div>
                   </div>
                   <div className="btn-group">
-                    <button className="btn btn-default" onclick={this.resetForm.bind(this)}>Reset</button>
+                    <button className="btn btn-default" onClick={this.resetForm.bind(this)}>Reset</button>
                     <button type="submit" className="btn btn-success">Post Job</button>
                   </div>
                 </form>

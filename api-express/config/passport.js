@@ -40,16 +40,12 @@ module.exports = function(passport, User) {
             error: 'Incorrect password.'
           }, false);
         }
-        let userinfo = {
-          email: user.email,
-          // first_name: user.first_name,
-          // last_name: user.last_name
-        };
-        const token = jwt.sign(userinfo.email, 'tarunarorareactexpress');
+        const token = jwt.sign(user.email, 'tarunarorareactexpress');
         return done(null, token, {
-          email: userinfo.email,
-          first_name: userinfo.first_name,
-          last_name: userinfo.last_name
+          id: user.id,
+          email: user.email,
+          first_name: user.first_name,
+          last_name: user.last_name,
         });
       }).catch(function(err) {
         console.log("Error:", err);

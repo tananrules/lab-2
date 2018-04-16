@@ -63,9 +63,9 @@ export default class Feed extends Component {
                         <br/>
                         <div className="panel-body">
                           <div className="row">
-                            <div className="col-md-12">
-                              <b>Employer</b>
-                            </div>
+                            { job.owner && <div className="col-md-12">
+                              <b>Employer</b> {job.owner.first_name} {job.owner.last_name}
+                            </div> }
                             <div className="col-md-12">
                               <b>Budget Range</b> {job.budget} $
                             </div>
