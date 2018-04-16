@@ -1,5 +1,18 @@
 var kafka = require('kafka-node');
 
+var topics = [
+    {topic: 'login_request', partition: 0},
+    {topic: 'signup_request', partition: 0},
+    {topic: 'getfiles_request', partition: 0},
+    {topic: 'delete_request', partition: 0},
+    {topic: 'upload_request', partition: 0},
+    {topic: 'getdetails_request', partition: 0},
+    {topic: 'createGroup_request', partition: 0},
+    {topic: 'deleteGroup_request', partition: 0}
+    {topic: 'getGroups_request', partition: 0},
+    {topic: 'usernames_request', partition: 0},
+];
+
 function ConnectionProvider() {
     this.getConsumer = function(topic_name) {
         if (!this.kafkaConsumerConnection) {
