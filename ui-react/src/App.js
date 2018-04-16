@@ -15,6 +15,7 @@ import Signup from './components/signup';
 // Routes
 import WelcomePage from './routes/WelcomePage';
 import PostProject from './routes/post-project';
+import Transaction from './routes/Transaction';
 import Feed from './routes/feed';
 import SingleJob from './routes/SingleJob';
 
@@ -74,6 +75,7 @@ class App extends Component {
           <Route exact path="/signup" component={Signup} />
           <AuthenticatedRoute exact path="/profile" component={Profile} />
           <AuthenticatedRoute exact path="/post-project" component={PostProject} />
+          <AuthenticatedRoute exact path="/transaction" component={Transaction} />
           <AuthenticatedRoute exact path="/feed" component={Feed} />
           <AuthenticatedRoute exact path="/feed/:id" component={SingleJob} />
 
