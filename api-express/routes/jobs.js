@@ -21,9 +21,6 @@ router.post('/', (req, res) => {
 
 //Get all Jobs
 router.get('/', (req, res) => {
-  // Job.find({}, (err, jobs) => {
-  // 	res.status(200).json(jobs);
-  // })
   Job.find({}).populate('owner', '-password').then((jobs) => {
   	res.status(200).json(jobs);
   })

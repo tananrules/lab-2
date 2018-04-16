@@ -10,7 +10,6 @@ module.exports = function(passport) {
       if(err) {
         res.status(404).json(err);
       } else {
-        debugger
         res.status(200).json({
           token: token,
           data: user 
@@ -26,7 +25,6 @@ module.exports = function(passport) {
           error: 'Server error'
         });
       } else {
-        debugger
         res.status(201).json({
           user: {
             email: user.email,
