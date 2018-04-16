@@ -4,12 +4,12 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 const user = localStorage.getItem('user') || null;
-const isAuthenticated = (localStorage.getItem('token') && localStorage.getItem('user')) ? true : false;
+const isAuthenticated = (localStorage.getItem('token') && localStorage.getItem('user')) ? true : true;
 
 const defaultState = {
 	defaultReducer: {
-		displaySnackbar: false,
-		snackbarMessage: "Default Message",
+		displaySnackbar: true,
+		snackbarMessage: "Tarun KUMAR is hired!!!",
 	},
 	loginReducer: {
 		isAuthenticated: isAuthenticated,

@@ -71,11 +71,12 @@ export default class SingleJob extends Component {
                   </div>
 
                   <div className="panel">
+                    <h4><b>Details</b></h4>
                     { singleJob.owner && <div className="panel-body">
                       <b>Employer</b> {singleJob.owner.first_name} {singleJob.owner.last_name}
                     </div> }
                      { singleJob.bids && <div className="panel-body">
-                      <b>No of bids yet</b> 5
+                      <b>No of bids yet</b> 2
                     </div> }
                     { singleJob.budget && <div className="panel-body">
                       <b>Budget Range</b> {singleJob.budget} $
@@ -83,21 +84,20 @@ export default class SingleJob extends Component {
                   </div>
 
                   <div className="panel">
-                    <div className="panel-body">
-                      <form className="form-inline">
-                        <div className="form-group">
-                          <label className="sr-only">Amount (in dollars)</label>
-                          <div className="input-group">
-                            <div className="input-group-addon">$</div>
-                            <input type="text" className="form-control" placeholder="Enter your bid" />
-                          </div>
-                        </div>
-                        &nbsp;&nbsp;&nbsp;
-                        <button type="submit" className="btn btn-info">Place your Bid</button>
-                      </form>
-
-                    </div>
+                    <h4><b>Bids</b></h4>
+                    <ul>
+                      <li>
+                        <h5>Name - Tarun Arora || Budget - 80$</h5>
+                        <button className="btn btn-xs btn-success">HIRE</button>
+                      </li>
+                       <li>
+                        <h5>Name - Tarun KUMAR || Budget - 50$</h5>
+                        <button className="btn btn-xs btn-success">HIRE</button>
+                      </li>
+                    </ul>
                   </div>
+
+                  
                 </div>
               </div>
             </div>

@@ -33,6 +33,7 @@ class Header extends Component {
               {!isAuthenticated && <li><Link to="/signup">Sign Up</Link></li>}
 
               {isAuthenticated && <li><Link to="/feed">Feed</Link></li>}
+              {isAuthenticated && <li><Link to="/feed">Transactions</Link></li>}
               {isAuthenticated && <li><Link to="/profile">My Profile</Link></li>}
               <form className="navbar-form navbar-right">
                 {isAuthenticated &&  <LogoutButton></LogoutButton>}
