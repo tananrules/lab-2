@@ -15,7 +15,6 @@ export default class SingleJob extends Component {
   componentDidMount() {
     const { match } = this.props
     axios.get(`http://localhost:8080/api/jobs/${match.params.id}`).then((response) => {
-      debugger
       this.setState({
         singleJob: response.data
       });
@@ -69,6 +68,18 @@ export default class SingleJob extends Component {
                           return(<span className="label label-default">{skill}</span>)
                         })}
                     </div>}
+                  </div>
+
+                  <div className="panel">
+                    { singleJob.owner && <div className="panel-body">
+                      <b>Employer</b> {singleJob.owner.first_name} {singleJob.owner.last_name}
+                    </div> }
+                     { singleJob.bids && <div className="panel-body">
+                      <b>No of bids yet</b> 5
+                    </div> }
+                    { singleJob.budget && <div className="panel-body">
+                      <b>Budget Range</b> {singleJob.budget} $
+                    </div> }
                   </div>
 
                   <div className="panel">

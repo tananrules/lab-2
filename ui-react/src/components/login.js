@@ -84,7 +84,7 @@ class Login extends Component {
                     <button type="submit" className="btn btn-lg btn-success btn-block">Sign In</button>
                   </div>
                   <div className="col-xs-6 col-sm-6 col-md-6">
-                    <Link to="/freelancer/signup" className="btn btn-lg btn-primary btn-block">Register</Link>
+                    <Link to="/signup" className="btn btn-lg btn-primary btn-block">Register</Link>
                   </div>
                 </div>
               </fieldset>

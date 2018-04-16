@@ -80,7 +80,7 @@ class Signup extends Component {
               <hr style={colorgraph} />
               <div className="row">
                 <div className="col-xs-12 col-md-6"><button type="submit" className="btn btn-primary btn-block btn-lg">Register</button></div>
-                <div className="col-xs-12 col-md-6"><Link to="/freelancer/login" className="btn btn-lg btn-success btn-block">Sign In</Link></div>
+                <div className="col-xs-12 col-md-6"><Link to="/login" className="btn btn-lg btn-success btn-block">Sign In</Link></div>
               </div>
             </form>
           </div>
